@@ -4,7 +4,7 @@
     <div class="col-md-3">
       <img
         class="img-fluid mb-2"
-        src="{{url_for('static',filename='img/post.jpg')}}"
+        src="{{url_for('static',filename='img/notfound.png')}}"
       />
     </div>
     <div class="col-md-9">
@@ -21,7 +21,17 @@
           <div class="card">
             <img
               class="img-fluid rounded-top post__img"
+              {%if
+              (
+              post[2]
+              !="img/"
+              )
+              %}
               src="{{url_for('static',filename=post[2])}}"
+              {%else%}
+              src="{{url_for('static',filename='img/notfound.png')}}"
+              {%endif
+              %}
               alt=""
               srcset=""
             />

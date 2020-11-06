@@ -29,10 +29,21 @@
       <div class="card">
         <img
           class="img-fluid rounded-top post__img"
+          {%if
+          (
+          post[0]
+          !="img/"
+          )
+          %}
           src="{{url_for('static',filename=post[0])}}"
+          {%else%}
+          src="{{url_for('static',filename='img/notfound.png')}}"
+          {%endif
+          %}
           alt=""
           srcset=""
         />
+
         <div class="card-body">
           <a href="/{{post[1].replace(' ','-').lower()}}"
             ><h3 class="h5">{{post[1]}}</h3></a
