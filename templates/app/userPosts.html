@@ -1,0 +1,78 @@
+{%extends 'layout/app.html'%} {%block content%}
+<div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple Blog Creating Using Flask Framework.</p>
+  <hr class="my-4" />
+  <a class="btn btn-dark rounded" href="#" role="button">Get Code Source</a>
+  {%if "user" in session%}
+  <a
+    class="btn btn-success rounded"
+    href="{{url_for('createPost')}}"
+    role="button"
+    >Create Post</a
+  >
+  {%endif%}
+</div>
+
+{%if postCount >0%}
+<h1 class="h4 text-center">Lastes Posts</h1>
+{%endif%}
+<div class="container">
+  {%if postCount == 0%}
+
+  <div class="alert alert-warning p-8">No Post Found</div>
+  {%endif%}
+
+  <div class="row postbox">
+    {% for post in posts %}
+    <div class="col-lg-4 col-md-6 p-2">
+      <div class="card">
+        <img
+          class="img-fluid rounded-top post__img"
+          src="{{url_for('static',filename=post[0])}}"
+          alt=""
+          srcset=""
+        />
+        <div class="card-body">
+          <a href="/{{post[1].replace(' ','-').lower()}}"
+            ><h3 class="h5">{{post[1]}}</h3></a
+          >
+          <p>{{post[2][:60]}}...</p>
+          <a
+            class="btn btn-success rounded"
+            href="{{url_for('putpost',id=post[3])}}"
+            >Edit</a
+          >
+          {%if (post[4]==0)%}
+          <button
+            class="btn btn-warning rounded archivePost"
+            data-post="{{post[3]}}"
+          >
+            archive
+          </button>
+          {%else%}
+          <button
+            class="btn btn-warning rounded unarchivePost"
+            data-post="{{post[3]}}"
+          >
+            Unarchive
+          </button>
+
+          {%endif%}
+          <button
+            class="btn btn-danger rounded deletePost"
+            data-post="{{post[3]}}"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+<script src="{{url_for('static',filename='js/app.js')}}"></script>
+<script src="{{url_for('static',filename='js/sw.js')}}"></script>
+{%endblock%} {% block styles%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/sw.css')}}" />
+{%endblock%}

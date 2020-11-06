@@ -1,0 +1,59 @@
+{% extends 'layout/app.html' %} {% block content%}
+<div
+  class="jumbotron"
+  style="
+    height: 400px;
+    {%if(post[0]!='img/')%}
+    background: url({{url_for('static',filename=post[0])}}) no-repeat;
+    {%else%}
+    background: url({{url_for('static',filename='img/notfound.png')}}) no-repeat;
+    {%endif%}
+    background-size: cover;
+    background-position: center;
+  "
+></div>
+<div class="container" style="overflow: hidden">
+  <h1 class="h3 text-center">{{post[1]}}</h1>
+  <div class="content">{{post[2] | safe}}</div>
+  <h2>Comments :</h2>
+  <ul class="list-group mb-4 commentbox">
+    {%for comm in comments%}
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-lg-1 d-flex align-items-center justify-content-center">
+          <img
+            src="{{url_for('static',filename=post[0])}}"
+            style="height: 50px; width: 50px; border-radius: 100%"
+            class="image-fluid"
+          />
+        </div>
+        <div class="col-lg-9">
+          <a href="/user/{{comm[0]}}" style="text-decoration: none">
+            <h5>{{comm[0]}}</h5></a
+          >
+          <p>{{comm[1]}}</p>
+        </div>
+      </div>
+      {%if (comm[2] == session["id"])%}
+      <button
+        class="btn btn-primary rounded deleteComment"
+        data-comment="{{comm[3]}}"
+      >
+        Delete Comment
+      </button>
+      {%endif%}
+    </li>
+    {%endfor%}
+  </ul>
+  <div class="card card-body mt-2 pb-2 mb-3">
+    <form action="{{url_for('Comment',id=post[3])}}" method="post">
+      <div class="form-group">
+        <label for="">Write a comment</label>
+        <textarea name="comment" class="comment__box"></textarea>
+        <button class="btn btn-success rounded mt-2">post a comment</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="{{url_for('static',filename='js/comments.js')}}"></script>
+{%endblock%}

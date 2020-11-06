@@ -1,0 +1,41 @@
+{%extends 'layout/app.html'%} {%block content%}
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-md-3">
+      <img
+        class="img-fluid mb-2"
+        src="{{url_for('static',filename='img/post.jpg')}}"
+      />
+    </div>
+    <div class="col-md-9">
+      <span class="badge badge-primary">Post Count: {{data[0][5]}}</span>
+      <span class="badge badge-secondary">Comment Count: {{data[0][6]}}</span>
+      <ul class="list-group mt-4">
+        <li class="list-group-item">Full Name : {{data[0][3]}}</li>
+        <li class="list-group-item">Email/Contact: {{data[0][4]}}</li>
+        <li class="list-group-item">Member Since: {{data[0][7]}}</li>
+      </ul>
+      <div class="row">
+        {% if(data[0][5] > 0)%} {% for post in data %}
+        <div class="col-lg-4 col-md-6 p-2">
+          <div class="card">
+            <img
+              class="img-fluid rounded-top post__img"
+              src="{{url_for('static',filename=post[2])}}"
+              alt=""
+              srcset=""
+            />
+            <div class="card-body my-card">
+              <a href="/{{post[0].replace(' ','-').lower()}}"
+                ><h3 class="h5">{{post[0]}}</h3></a
+              >
+              <p>{{post[3][:20]}}...</p>
+            </div>
+          </div>
+        </div>
+        {%endfor%} {%endif%}
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock content%}

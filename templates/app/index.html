@@ -1,0 +1,93 @@
+{%extends 'layout/app.html'%} {%block content%}
+<div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple Blog Creating Using Flask Framework.</p>
+  <hr class="my-4" />
+  <a class="btn btn-dark rounded" href="#" role="button">Get Code Source</a>
+  {%if "user" in session%}
+  <a
+    class="btn btn-success rounded"
+    href="{{url_for('createPost')}}"
+    role="button"
+    >Create Post</a
+  >
+  {%endif%}
+</div>
+{%if (lenPost > 0) %}
+<h1 class="h4 text-center">Lastes Posts</h1>
+{%endif%}
+<div class="container">
+  {%if (lenPost == 0) %}
+  <div class="alert alert-warning p-8">No Post Found</div>
+  {%endif%}
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-lg-4 col-md-6 p-2">
+      <div class="card">
+        <img
+          class="img-fluid rounded-top post__img"
+          {%if
+          (
+          post[0]
+          !="img/"
+          )
+          %}
+          src="{{url_for('static',filename=post[0])}}"
+          {%else%}
+          src="{{url_for('static',filename='img/notfound.png')}}"
+          {%endif
+          %}
+          alt=""
+          srcset=""
+        />
+        <div class="card-body my-card">
+          <a href="/{{post[1].replace(' ','-').lower()}}"
+            ><h3 class="h5">{{post[1]}}</h3></a
+          >
+          <p>{{post[2][:80]}}...</p>
+        </div>
+        <div
+          class="card-footer bg-transparent bg-none d-flex justify-content-center align-items-center"
+        >
+          <img
+            src="{{url_for('static',filename='img/post.jpg')}}"
+            alt=""
+            class="rounded-circle user__img"
+          />
+          <a href="/user/{{post[4]}}">
+            <span class="align-middle h6 ml-2">{{post[3]}}</span></a
+          >
+          <span class="badge badge-info ml-3">Comment: {{post[6]}}</span>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+{%if pageCount >1 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {%if( page-1 < 1) %}
+    <li class="page-item disabled">
+      <a class="page-link" href="/">Previous</a>
+    </li>
+    {%else%}
+    <li class="page-item">
+      <a class="page-link" href="/?page={{page-1}}">Previous</a>
+    </li>
+    {%endif%} {% for p in range(1,pageCount+1)%}
+    <li class="page-item {%if(p==page)%}disabled{%endif%}">
+      <a class="page-link" href="/?page={{p}}">{{p}}</a>
+    </li>
+    {%endfor%} {%if( page+1 > pageCount) %}
+    <li class="page-item disabled">
+      <a class="page-link" href="/">Next</a>
+    </li>
+    {%else%}
+    <li class="page-item">
+      <a class="page-link" href="/?page={{page+1}}">Next</a>
+    </li>
+    {%endif%}
+  </ul>
+</nav>
+{%endif%} {%endblock%}

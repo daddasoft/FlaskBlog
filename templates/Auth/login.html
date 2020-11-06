@@ -1,0 +1,29 @@
+{% extends 'layout/app.html' %} {% block content%}
+<div class="container">
+  <div class="card card-body mt-5">
+    {{user}} {% with msg = get_flashed_messages()%} {%if msg%}
+    <div class="alert alert-success">{{msg[0] }}</div>
+    {%endif%} {%endwith%}
+    <h1 class="h5">Login</h1>
+    <form action="{{url_for('login')}}" method="post">
+      <div class="form-group">
+        <label for="">username Or Email</label>
+        <input
+          type="username"
+          value="{{old[0]}}"
+          name="username"
+          class="form-control rounded"
+        />
+      </div>
+      <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" name="password" class="form-control rounded" />
+      </div>
+      <button class="btn btn-primary rounded">login</button>
+      <a href="{{url_for('register')}}" class="btn btn-link"
+        >Don't Have an account ?</a
+      >
+    </form>
+  </div>
+</div>
+{%endblock%}
