@@ -1,10 +1,11 @@
 import mysql.connector
+from env import env
 try:
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="dadda",
-        database="myblog"
+         host=env("host"),
+        user=env("user"),
+        passwd=env("pass"),
+        database=env("database")
     )
 except:
     print("Error Will Connecting To Database")

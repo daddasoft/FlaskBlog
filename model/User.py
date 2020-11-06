@@ -1,12 +1,13 @@
 import mysql.connector
 from flask import session
+from env import env
 from werkzeug.security import generate_password_hash, check_password_hash
 try:
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="dadda",
-        database="myblog"
+        host=env("host"),
+        user=env("user"),
+        passwd=env("pass"),
+        database=env("database")
     )
 except:
     print("Error Will Connecting To Database")

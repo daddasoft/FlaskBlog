@@ -6,10 +6,11 @@ from werkzeug.utils import secure_filename
 from Random import RandomString
 from math import ceil
 import mistune
+from env import env
 from re import sub
 from flask_cors import CORS
 todoApp = Flask(__name__, static_folder="Resources/static")
-todoApp.config['SECRET_KEY'] = "CVLOEKKLDKJMKSDASJDHASDBHASJDK@ABHD"
+todoApp.config['SECRET_KEY'] = env("appSecret")
 
 CORS(todoApp)
 
