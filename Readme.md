@@ -34,14 +34,14 @@ post image directory : **Resources/static/posts**
 - You should have a mysql-Server installed or install phpmyadmin (Use Xampp That includes all this)
 - Create new Database name it As you like
 
-![m](screenshot/create-db.jpg)
+![m](https://github.com/daddasoft/FlaskBlog/blob/main/Screenshot/create-db.jpg)
 
 - After Select the database you created
-  ![alt](screenshot/select-db.jpg)
+  ![alt](https://github.com/daddasoft/FlaskBlog/blob/main/Screenshot/select-db.jpg)
   click on import click on browse and navigate to the project folder you will find a folder called db inside it there is a SQL file choose it and click go
 - after done go back to the project rename the file .env.Example to .env and change database config
 
-![alt](screenshot/env.jpg)
+![alt](https://github.com/daddasoft/FlaskBlog/blob/main/Screenshot/env.jpg)
 
 > Note : app Secret Should be in Strong Format and not show it to any one (it's used to hash and encrypt passwords and cookies )
 
@@ -56,11 +56,11 @@ open a new Terminal and Navigate To The Project Folder and Run
 
 ### Posts Cards
 
-![text](screenshot/posts-card.jpg)
+![text](https://github.com/daddasoft/FlaskBlog/blob/main/Screenshot/posts-card.jpg)
 
 ### Users Posts
 
-![text](screenshot/user-post-card.jpg)
+![text](https://github.com/daddasoft/FlaskBlog/blob/main/Screenshot/user-post-card.jpg)
 
 ### follow me
 
