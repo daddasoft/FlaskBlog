@@ -56,7 +56,7 @@ open a new Terminal and Navigate To The Project Folder and Run
 
 ### Posts Cards
 
-![text](screenshot/posts-card.jpg)
+![text](./screenshot/posts-card.jpg)
 
 ### Users Posts
 
